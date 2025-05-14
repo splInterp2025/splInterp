@@ -137,7 +137,7 @@ for i in range(len(dict_positions)):
     ax.scatter(pos[0], pos[1], -0.2, color=color, s=100, marker='x', alpha=1.0, linewidth=2, edgecolors='black',zorder=2)
     
     ax.text(pos[0], pos[1], height + 0.05, f"α={dict_biases[i]:.1f}", 
-           fontsize=9, ha='center', zorder=4)
+           fontsize=15, ha='center', zorder=4)
 
 # 3. Visualize some power cells in 3D
 if len(dict_positions) >= 4:
@@ -229,8 +229,8 @@ ax.scatter(X_np[:, 0], X_np[:, 1], np.ones_like(X_np[:, 0]) * -0.2,
 
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
-ax.set_zlabel('Height (Higher Centers = Lower Bias)')
-ax.set_title('Power Diagram as Projection of 3D Voronoi Diagram\nHigher Points → Lower Bias (α)', fontsize=14)
+ax.set_zlabel('Height (Higher Centers = Lower Bias)',fontsize=18)
+ax.set_title('Power Diagram as Projection of 3D Voronoi Diagram\nHigher Points → Lower Bias (α)', fontsize=22)
 
 ax.set_xlim(-2, 2)
 ax.set_ylim(-2, 2)
@@ -239,7 +239,7 @@ ax.set_zlim(-0.3, 1.2)
 ax.text2D(0.5, 0.01, 
          "The power diagram (colored regions) is the projection of a Voronoi diagram in 3D\n"
          "where centers are lifted based on their bias values (α)", 
-         transform=ax.transAxes, ha='center', fontsize=12, 
+         transform=ax.transAxes, ha='center', fontsize=18, 
          bbox=dict(facecolor='white', alpha=0.7, boxstyle='round,pad=0.5'))
 
 ax.view_init(elev=25, azim=-35)

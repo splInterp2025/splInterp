@@ -55,7 +55,7 @@ cmap = plt.cm.viridis
 
 # VORONOI DIAGRAM 
 ax = axs[0]
-ax.set_title("a) Standard Voronoi Diagram", fontsize=16, pad=20)  
+ax.set_title("a) Standard Voronoi Diagram", fontsize=22, pad=24)  
 
 # Compute Voronoi diagram
 # Add far away points to close the regions
@@ -84,11 +84,11 @@ ax.set_xticks([])
 ax.set_yticks([])
 
 ax.text(-4.33, 3.0, "• Each point owns the region closest to it\n• Creates cell boundaries that are equidistant\n  between neighboring points",
-       fontsize=11, bbox=dict(facecolor='white', alpha=0.9, boxstyle='round,pad=0.5'), zorder=20)
+       fontsize=16, bbox=dict(facecolor='white', alpha=0.9, boxstyle='round,pad=0.5'), zorder=20)
 
 # K-NN (k=1) 
 ax = axs[1]
-ax.set_title("b) K-Nearest Neighbors (k=1)", fontsize=16, pad=20)  # Increased padding
+ax.set_title("b) K-Nearest Neighbors (k=1)", fontsize=22, pad=24)  # Increased padding
 
 # Train a KNN model with k=1
 knn = KNeighborsClassifier(n_neighbors=1)
@@ -118,11 +118,11 @@ legend1 = ax.legend(*scatter.legend_elements(),
 ax.add_artist(legend1)
 
 ax.text(-4.33, 3.0, "• Assigns each point to nearest neighbor\n• With k=1, the boundaries form a Voronoi diagram\n• Colors represent different classes (e.g., categories)",
-       fontsize=11, bbox=dict(facecolor='white', alpha=0.9, boxstyle='round,pad=0.5'), zorder=20)
+       fontsize=16, bbox=dict(facecolor='white', alpha=0.9, boxstyle='round,pad=0.5'), zorder=20)
 
 # K-MEANS 
 ax = axs[2]
-ax.set_title("c) K-means Clustering (k=3)", fontsize=16, pad=20)  # Increased padding
+ax.set_title("c) K-means Clustering (k=3)", fontsize=22, pad=24)  # Increased padding
 
 # Generate new random data (more points) for K-means
 num_data_points = 200
@@ -159,11 +159,11 @@ ax.set_yticks([])
 
 
 ax.text(-4.33, 3.0, "• Finds optimal centers (stars) given data\n• Cell boundaries form a Voronoi diagram\n• Centers ≠ data points (unlike k-NN)",
-       fontsize=11, bbox=dict(facecolor='white', alpha=0.9, boxstyle='round,pad=0.5'), zorder=20)
+       fontsize=16, bbox=dict(facecolor='white', alpha=0.9, boxstyle='round,pad=0.5'), zorder=20)
 
 # POWER DIAGRAM 
 ax = axs[3]
-ax.set_title("d) Power Diagram", fontsize=16, pad=20)  # Increased padding
+ax.set_title("d) Power Diagram", fontsize=22, pad=24)  # Increased padding
 
 # Compute power distance - squared Euclidean distance minus weight
 def power_distance(x, centers, weights):
@@ -216,10 +216,10 @@ ax.set_yticks([])
 
 
 ax.text(-4.33, 2.7, "• Generalizes Voronoi diagrams with weights/biases\n• Similar to how GMMs generalize k-means\n• Weights act as 'priors' over regions\n• Equivalent to projecting a higher-D Voronoi",
-       fontsize=11, bbox=dict(facecolor='white', alpha=0.9, boxstyle='round,pad=0.5'), zorder=20)
+       fontsize=16, bbox=dict(facecolor='white', alpha=0.9, boxstyle='round,pad=0.5'), zorder=20)
 
 plt.suptitle("From Voronoi to Power Diagrams", 
-             fontsize=20, y=0.99)  # Moved title up slightly
+             fontsize=28, y=0.99)  # Moved title up slightly
 
 plt.tight_layout()
 

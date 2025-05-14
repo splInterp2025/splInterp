@@ -46,7 +46,7 @@ def plot_power_diagram(ax, centers, alphas, title, bounds=(-4, 4, -4, 4), resolu
              interpolation='nearest', alpha=0.5)
     
     # Plot the centers
-    ax.scatter(centers[:, 0], centers[:, 1], color='black', s=50, zorder=2)
+    ax.scatter(centers[:, 0], centers[:, 1], color='black', s=90, zorder=2)
     
     # Find minimum positive alpha for normalization
     positive_alphas = [a for a in alphas if a > 0]
@@ -66,12 +66,14 @@ def plot_power_diagram(ax, centers, alphas, title, bounds=(-4, 4, -4, 4), resolu
                 
         # Still show the original alpha value in the text
         ax.text(center[0], center[1]+0.3, f"α={alpha:.1f}", 
-               ha='center', va='bottom', fontsize=9)
+               ha='center', va='bottom', fontsize=15)
     
     ax.set_xlim(bounds[0], bounds[1])
     ax.set_ylim(bounds[2], bounds[3])
-    ax.set_title(title)
+    ax.set_title(title, fontsize=22)
     ax.grid(alpha=0.3)
+    ax.set_xticks([])
+    ax.set_yticks([])
 
 def plot_second_order_power_diagram(ax, centers, alphas, title, bounds=(-4, 4, -4, 4), resolution=400):
     """Plot a 2nd-order power diagram (each cell is closest to 2 centers)"""
@@ -101,7 +103,7 @@ def plot_second_order_power_diagram(ax, centers, alphas, title, bounds=(-4, 4, -
              interpolation='nearest', alpha=0.5)
     
     # Plot the centers
-    ax.scatter(centers[:, 0], centers[:, 1], color='black', s=50)
+    ax.scatter(centers[:, 0], centers[:, 1], color='black', s=90)
     
     # Find minimum positive alpha for normalization
     positive_alphas = [a for a in alphas if a > 0]
@@ -121,12 +123,14 @@ def plot_second_order_power_diagram(ax, centers, alphas, title, bounds=(-4, 4, -
                 
         # Still show the original alpha value in the text
         ax.text(center[0], center[1]+0.3, f"α={alpha:.1f}", 
-               ha='center', va='bottom', fontsize=9)
+               ha='center', va='bottom', fontsize=15)
     
     ax.set_xlim(bounds[0], bounds[1])
     ax.set_ylim(bounds[2], bounds[3])
-    ax.set_title(title)
+    ax.set_title(title, fontsize=22)
     ax.grid(alpha=0.3)
+    ax.set_xticks([])
+    ax.set_yticks([])
 
 # Set up centers and different alpha values
 np.random.seed(42)
@@ -148,6 +152,6 @@ plot_power_diagram(axes[1], centers, alphas_power, "Power Diagram\n(variable α�
 plot_second_order_power_diagram(axes[2], centers, alphas_power, "2nd-order Power Diagram\n(closest to 2 centers)")
 
 
-plt.suptitle("Power Diagrams and Voronoi Diagrams", fontsize=16)
+plt.suptitle("Power Diagrams and Voronoi Diagrams", fontsize=28)
 plt.tight_layout()
 plt.show()

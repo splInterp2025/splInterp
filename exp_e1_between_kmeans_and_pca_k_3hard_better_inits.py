@@ -51,17 +51,35 @@ x2 = torch.linspace(-2, 2, resolution)
 grid_points = torch.stack(torch.meshgrid(x1, x2, indexing='ij'), -1).reshape(-1, 2)
 
 # Convert to numpy
+
 X_np = X.detach().numpy()
 grid_np = grid_points.detach().numpy()
 
+# --- Improved initialization for more consistent SAE performance ---
+# Run K-means before initializing SAE parameters
+Kr = 3
+kmeans = KMeans(n_clusters=Kr, init='k-means++', n_init=10, random_state=42)
+kmeans.fit(X_np)
+kmeans_labels = kmeans.predict(X_np)
+grid_kmeans_labels = kmeans.predict(grid_np)
+
 # Setup for sparse autoencoder
-W1 = torch.nn.Parameter(torch.randn(K, 2))
+
+# 1. Use KMeans centroids for the first Kr elements, random for the rest
+W1 = torch.nn.Parameter(torch.empty(K, 2))
 with torch.no_grad():
-    # Initialize dictionary elements near data points
-    random_indices = torch.randint(0, n_points, (K,))
-    W1.data = X[random_indices] + torch.randn(K, 2) * 0.1
-W2 = torch.nn.Parameter(torch.randn(2, K))
-b = torch.nn.Parameter(torch.randn(K) * 1.0)  # Larger bias for visible polytopes
+    # Use KMeans centroids for the first Kr elements
+    W1.data[:Kr] = torch.tensor(kmeans.cluster_centers_, dtype=W1.dtype)
+    if K > Kr:
+        random_indices = torch.randint(0, n_points, (K-Kr,))
+        W1.data[Kr:] = X[random_indices] + torch.randn(K-Kr, 2) * 0.1
+    # Normalize dictionary elements to unit norm
+    W1.data = W1.data / W1.data.norm(dim=1, keepdim=True)
+
+# 2. Initialize W2 as small random values
+W2 = torch.nn.Parameter(torch.randn(2, K) * 0.1)
+# 3. Set bias to zeros for a neutral start
+b = torch.nn.Parameter(torch.zeros(K))
 
 # Optimizer
 optim = torch.optim.Adam([W1, W2, b], lr=8e-3)
@@ -74,14 +92,6 @@ print(f"Press 'q' to quit - Using top-{k_active} SAE")
 # Training Params
 num_steps = 7500
 visualization_interval = 10
-
-Kr = 3
-
-# Run K-means once at the start
-kmeans = KMeans(n_clusters=Kr, init='k-means++', n_init=10, random_state=42)
-kmeans.fit(X_np)
-kmeans_labels = kmeans.predict(X_np)
-grid_kmeans_labels = kmeans.predict(grid_np)
 
 # Initialize PCA directions for each cluster
 pca_directions = np.zeros((Kr, 2))

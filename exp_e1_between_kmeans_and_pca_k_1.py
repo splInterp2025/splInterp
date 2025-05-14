@@ -152,10 +152,8 @@ for step in range(num_steps):
                          interpolation='nearest')            
                         
             axes[0].scatter(X_np[:, 0], X_np[:, 1], color='black', alpha=0.8, label="Data Points")
-
-            axes[0].scatter(X_np[:, 0], X_np[:, 1], color='black', alpha=0.8, label="Data Points")
             axes[0].scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1],
-                          color='red', alpha=0.9, marker='o', s=50, label="Centroids")
+                          color='red', alpha=0.9, marker='o', s=80, label="Centroids")
             
             # Draw lines to show which centroid each point belongs to
             for i in range(n_points):
@@ -163,7 +161,7 @@ for step in range(num_steps):
                 axes[0].plot([X_np[i, 0], center[0]], [X_np[i, 1], center[1]], 
                             'k-', alpha=0.1)
                 
-            axes[0].set_title(f"K-means (MSE: {kmeans_mse:.6f})")
+            axes[0].set_title(f"K-means (MSE: {kmeans_mse:.6f})", fontsize=16)
             axes[0].set_xlim(-2, 2)
             axes[0].set_ylim(-2, 2)
             axes[0].grid(alpha=0.3)
@@ -171,7 +169,7 @@ for step in range(num_steps):
             axes[0].set_yticks([])
             axes[0].set_xticklabels([])
             axes[0].set_yticklabels([])
-            axes[0].legend(loc='upper right')
+            axes[0].legend(loc='upper right', fontsize=16)
             
             # 2. SAE visualization 
             Z = (grid_points @ W1.T / W1_norm) + b
@@ -200,7 +198,7 @@ for step in range(num_steps):
             axes[1].scatter(W1[:, 0].detach().cpu().numpy(), W1[:, 1].detach().cpu().numpy(),
                           color='red', alpha=0.9, marker='x', s=marker_sizes.detach().cpu().numpy(),
                           label="Dictionary Elements")
-            
+
             # Draw lines to show which dictionary element each point uses
             '''
             for i in range(n_points):
@@ -208,7 +206,7 @@ for step in range(num_steps):
                 axes[1].plot([X_np[i, 0], w[0, 0]], [X_np[i, 1], w[0, 1]], 
                             'k-', alpha=0.1)
             '''
-            axes[1].set_title(f"Top-1 SAE (Loss: {loss.item():.6f})")
+            axes[1].set_title(f"Top-1 SAE (Loss: {loss.item():.6f})", fontsize=16)
             axes[1].set_xlim(-2, 2)
             axes[1].set_ylim(-2, 2)
             axes[1].grid(alpha=0.3)
@@ -216,21 +214,16 @@ for step in range(num_steps):
             axes[1].set_yticks([])
             axes[1].set_xticklabels([])
             axes[1].set_yticklabels([])
-            axes[1].legend(loc='upper right')
+            axes[1].legend(loc='upper right', fontsize=16)
             
             # 3. PCA extension of k-means visualization 
             axes[2].imshow(grid_kmeans_labels.reshape(resolution, resolution),
                          extent=[-2, 2, -2, 2], alpha=0.6, aspect="auto", cmap='tab20',
                          interpolation='nearest')
             
-            #vor = Voronoi(kmeans.cluster_centers_)
-            #voronoi_plot_2d(vor, ax=axes[2], show_vertices=False, line_colors='white', 
-            #                line_width=2, line_alpha=1.0, point_size=0)
-                        
-            
             axes[2].scatter(X_np[:, 0], X_np[:, 1], color='black', alpha=0.8, label="Data Points")
             axes[2].scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1],
-                          color='red', alpha=0.9, marker='o', s=50, label="Centroids")
+                          color='red', alpha=0.9, marker='o', s=80, label="Centroids")
             
             # Draw PCA directions as lines
             for k in range(Kr):  # Use Kr here
@@ -251,7 +244,7 @@ for step in range(num_steps):
                 axes[2].plot([center[0], projected[0]], [center[1], projected[1]], 
                             'b-', alpha=0.3)
             
-            axes[2].set_title(f"PCA Extension of K-means (MSE: {pca_mse:.6f})")
+            axes[2].set_title(f"PCA Extension of K-means (MSE: {pca_mse:.6f})", fontsize=16)
             axes[2].set_xlim(-2, 2)
             axes[2].set_ylim(-2, 2)
             axes[2].grid(alpha=0.3)
@@ -259,9 +252,9 @@ for step in range(num_steps):
             axes[2].set_yticks([])
             axes[2].set_xticklabels([])
             axes[2].set_yticklabels([])
-            axes[2].legend(loc='upper right')
+            axes[2].legend(loc='upper right', fontsize=16)
             
-        plt.suptitle(f"Step {step}: K-means vs. Top-1 SAE vs. PCA Extension")
+        plt.suptitle(f"Step {step}: K-means vs. Top-1 SAE vs. PCA Extension", fontsize=28)
         plt.tight_layout()
         plt.pause(0.01)
 

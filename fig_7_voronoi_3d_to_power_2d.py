@@ -130,7 +130,7 @@ for i in range(len(points)):
         plotter.add_point_labels(
             [point_3d + np.array([0, 0, 0.15])],
             [f"w={weights[i]:.1f}"],
-            font_size=12,
+            font_size=22,
             text_color='black',
             shape_color='#e0e0e0',
             always_visible=True,
@@ -165,15 +165,15 @@ plotter.show_grid(
 plotter.add_text(
     "3D Voronoi Projecting to 2D Power Diagram",
     position='upper_edge',
-    font_size=9,
+    font_size=17,
     color='black',
     shadow=True
 )
 
 plotter.add_text(
     "Higher centers → Lower weights → Smaller power regions below",
-    position='lower_right',
-    font_size=9,
+    position='lower_edge',
+    font_size=12,
     color='black',
     shadow=True
 )
