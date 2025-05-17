@@ -1,6 +1,6 @@
 # SplInterp: Sparse Autoencoders through the Lens of Spline Theory
 
-This repository contains the code accompanying the NeurIPS 2025 paper **"SplInterp: Improving our Understanding and Training of Sparse Autoencoders"**.
+This repository contains the code accompanying the paper **"SplInterp: Improving our Understanding and Training of Sparse Autoencoders"**.
 
 ## Overview
 
