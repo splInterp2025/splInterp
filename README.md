@@ -24,7 +24,7 @@ Sparse Autoencoders (SAEs) are widely used in mechanistic interpretability, but 
 First, install the required Python libraries:
 
 ```
-pip install torch numpy matplotlib tqdm scikit-learn scipy pyvista
+pip install torch numpy matplotlib tqdm scikit-learn scipy pyvista transformers datasets
 
 ```
 ---
